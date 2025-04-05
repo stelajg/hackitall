@@ -35,5 +35,18 @@
     <a href="#contact">Contact Us</a>
     <a href="{{ url_for('logout') }}" class="nav-link">Logout</a>
   {% endif %}
-  <a href="javascript:void(0)" class="nav-link" id="openPopup">Welcome</a>
+  <a href="javascript:void(0)" class="nav-link" id="openPopup"  onclick="openPopup()">Welcome</a>
+  <script>
+      function openPopup() {
+      // Create a SpeechSynthesisUtterance
+      const utterance = new SpeechSynthesisUtterance("Welcome to this tutorial!");
+
+      // Select a voice
+      const voices = speechSynthesis.getVoices();
+      utterance.voice = voices[0]; // Choose a specific voice
+
+      // Speak the text
+      speechSynthesis.speak(utterance);
+    }
+  </script>
 </div>

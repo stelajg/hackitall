@@ -4,16 +4,47 @@
         <span class="close-btn" id="closePopup">&times;</span>
         <h5>👋 Welcome to NTB!</h5>
         <p>We're happy you're here. If you need help or want to tell us who you are, you can do it below:</p>
-        
-        <form id="popupForm">
-        <div class="form-group">
-            <label for="username" style="font-weight: 600;">Your name:</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Enter your name" />
-        </div>
-        <button type="submit" class="btn btn-sm btn-primary mt-2">Say Hello</button>
-        </form>
 
-        <div id="greeting" style="display: none; margin-top: 10px;"></div>
+        <!-- 👇 Chatbot Section -->
+        <div id="chatbot" style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
+            <h6>💬 Chat with NTB Assistant</h6>
+            <div id="chatWindow" style="height: 150px; overflow-y: auto; background: #f9f9f9; padding: 10px; border: 1px solid #ccc; margin-bottom: 10px;">
+            <!-- Chat messages will go here -->
+            </div>
+            <div style="display: flex; gap: 5px;">
+            <input type="text" id="userMessage" placeholder="Type your message..." class="form-control" />
+            <button id="sendMessage" class="btn btn-sm btn-secondary">Send</button>
+            </div>
+            <script>
+                document.getElementById("sendMessage").addEventListener("click", () => {
+                  const chatWindow = document.getElementById("chatWindow");
+                  const input = document.getElementById("userMessage");
+                  const message = input.value.trim();
+              
+                  if (message) {
+                    // User message
+                    chatWindow.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+              
+                    // Basic fake bot response
+                    setTimeout(() => {
+                      const botReply = generateBotReply(message);
+                      chatWindow.innerHTML += `<div><strong>NTB Bot:</strong> ${botReply}</div>`;
+                      chatWindow.scrollTop = chatWindow.scrollHeight;
+                    }, 500);
+              
+                    input.value = '';
+                  }
+                });
+              
+                function generateBotReply(msg) {
+                  msg = msg.toLowerCase();
+                  if (msg.includes("help")) return "Sure! What do you need help with?";
+                  if (msg.includes("name")) return "I'm NTB Assistant, your digital banking buddy!";
+                  
+                  return "I'm here to help! Try asking about your account, services, or how to get started.";
+                }
+              </script>
+        </div>
     </div>
 </div>
   
