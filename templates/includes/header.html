@@ -1,13 +1,20 @@
-<header style="background-color:#101010 !important;">
+<header style="background-color:#785EF0 !important;">
+      <div class="d-flex align-items-center gap-4">
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="width: 200px; height: 200px;">
+        </div>
         <div class="navbarlogo">
-        <div class="navbar-innerlogo">
-          <div class="container py-3">
-                  <h1 style="color:yellow !important; font-size:50px; ">WELCOME TO RETAIL BANKING</h1>
+          <div class="navbar-innerlogo">
+            <div class="container py-3">
+              <div>
+                <h1 style="color:#FFFFFF !important; font-size:50px; font-family: 'Lexend', Lexend; ">Welcome to NTB</h1>
+                <h1 style="color:#FFFFFF !important; font-size:20px; font-family: 'Lexend', Lexend; ">Welcome to No Trouble Banking. A banking for all.</h1>
+              </div>
             </div>
           </div>
         </div>
-    <div class="container">
-
-      {% include "includes/nav.html" %}
-    </div>
+      </div>
+          <div class="navbar">
+            {% include "includes/nav.html" %}
+      </div>
 </header>
