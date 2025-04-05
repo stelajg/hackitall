@@ -22,7 +22,7 @@ def generate_response(prompt):
     # print(prompt)
     # Run the command and capture the output
     response = ollama.chat(
-        model = "deepseek-v2",
+        model = "deepseek-r1:7b",
         messages = prompt
     )
     answer = response.message.content

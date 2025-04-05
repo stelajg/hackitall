@@ -9,6 +9,7 @@ database.db
 .idea
 # C extensions
 *.so
+env37/
 
 # Distribution / packaging
 .Python
