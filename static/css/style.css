@@ -59,6 +59,7 @@ p {
 }
 .navbar {
     overflow: hidden;
+    width: 100%;
     background-color: #ffff66 !important;
     margin: 0 !important;
     padding: 0 5% !important;
