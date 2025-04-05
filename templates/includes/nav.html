@@ -37,15 +37,10 @@
   {% endif %}
   <a href="javascript:void(0)" class="nav-link" id="openPopup"  onclick="openPopup()">Welcome</a>
   <script>
-      function openPopup() {
-      // Create a SpeechSynthesisUtterance
+    function openPopup() {
       const utterance = new SpeechSynthesisUtterance("Welcome to this tutorial!");
-
-      // Select a voice
       const voices = speechSynthesis.getVoices();
       utterance.voice = voices[0]; // Choose a specific voice
-
-      // Speak the text
       speechSynthesis.speak(utterance);
     }
   </script>

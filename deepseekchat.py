@@ -1,15 +1,16 @@
 import speech_recognition as sr
 import sys
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import ollama
 import subprocess
 
 full_transcript = [
-            {"role":"system", "content":"You are a language model called R1 created by DeepSeek, answer the questions being asked in less than 300 characters."},
-        ]
-
+    {"role":"system", "content":"You are a language model called R1 created by DeepSeek, answer the questions being asked in less than 300 characters."},
+]
 
 app = Flask(__name__)
+CORS(app)
 
 def generate_response(prompt):
     """
@@ -22,7 +23,7 @@ def generate_response(prompt):
     # print(prompt)
     # Run the command and capture the output
     response = ollama.chat(
-        model = "deepseek-v2",
+        model = "deepseek-r1:7b",
         messages = prompt
     )
     answer = response.message.content
@@ -69,5 +70,5 @@ def home():
     return app.send_static_file("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5005)
     # chat()
