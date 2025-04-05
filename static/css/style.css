@@ -54,19 +54,19 @@ p {
     /* color: #fff; */
 }
 .footer h2{
-    color: #ffd700;
+    color: #ede7ef;
     text-align: 5px;
 }
 .navbar {
     overflow: hidden;
     width: 100%;
-    background-color: #ffff66 !important;
+    background-color: linear-gradient(to right, #131e7e, #171328) !important;
     margin: 0 !important;
     padding: 0 5% !important;
     border-radius: 0 !important;
     display: block !important;
 }
-.navbar a {
+.navbar a, .navbar button {
   float: left;
   font-size: 16px;
   color: white;
@@ -81,7 +81,7 @@ p {
     padding-top:0;
 }
 .navbar-inner {
-    background: #ffff66;
+    background: #504587;
     border-radius:0;
     filter: none;
     border: none;
@@ -136,7 +136,7 @@ p {
 .navbar .nav > li:hover> a, .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
     border: 1px solid #FECE1A;
     color: #fff;
-    background-color: #181A1C;
+    background-color: #0c64bd;
     transition: border-color 1s ease;
     transform: scale(1.1);
 }
@@ -154,12 +154,12 @@ p {
     border: 1px solid #181A1C;
 }
 .nav-pills > li > a:hover, .nav-pills > .active > a, .nav-pills > .active > a:hover, .nav-pills > .active > a:focus {
-    background: #181A1C;
+    background: #81c2dc;
     color: #fff;
 }
 .navbar .btn-navbar:hover, .navbar .btn-navbar {
     border-radius:0;
-    background:#ffff66;
+    background:#700c57;
     color: #000;
 }
 .topnav{
@@ -254,7 +254,7 @@ p {
     transition: border-color 1s ease;
 }
 .navbarlogo .nav > li:hover> a, .navbarlogo .nav > .active > a, .navbarlogo .nav > .active > a:hover, .navbarlogo .nav > .active > a:focus {
-    border: 1px solid #FECE1A;
+    border: 1px solid #351afe;
     color: #fff;
     background-color: #181A1C;
     transition: border-color 1s ease;
@@ -349,7 +349,7 @@ p {
     padding:20px 30px;
     border-style: solid;
     border-width: 2.5px;
-    border-color: #000000;
+    border-color: #ce0f0f;
     box-shadow: 5px 5px 5px grey;
     border-radius: 25px;
     overflow: auto;
@@ -620,7 +620,7 @@ p {
     list-style: none;
     float: none;
     position:relative;
-    margin:5px; auto;
+    margin:5px auto;
 }
 .social li {
     display:inline-block;
@@ -823,7 +823,7 @@ p {
 }
 
 /* Submenu css*/
-.navbar a {
+.navbar a, .navbar button{
   float: left;
   font-size: 16px;
   color:#000;
@@ -849,7 +849,7 @@ p {
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover, .navbar button:hover, .dropdown:hover .dropbtn {
   background-color:#ffff66;
   text-decoration: none;
 }
@@ -878,7 +878,7 @@ p {
   margin: 0;
 }
 
-.navbar a:hover, .subnav:hover .subnavbtn {
+.navbar a:hover, .navbar button:hover, .subnav:hover .subnavbtn {
   background-color:#000 ;
   color:white;
 }
@@ -898,7 +898,7 @@ p {
 }
 
 .subnav-content a:hover {
-  background-color:#ffff66 ;
+  background-color:#2326d0 ;
   color: black;
 }
 
@@ -908,12 +908,20 @@ p {
 
 
 .active {
-  background-color: #ffff66;
-  color: black !important;
+  background-color: #3e2d939e; /* BUTON = MENIU */
+  color: rgb(0, 0, 0) !important;
 }
-a.nav-link.active:hover {
-    color: white !important;
+a.nav-link.active:hover { /* BUTOANE = MENIU */
+    color: rgb(170, 204, 214) !important;
+    background-color: #1c0b49 !important;
 }
+
+a.nav-link:hover {
+    color: rgb(170, 204, 214) !important;
+    background-color: #1c0b49 !important;
+}
+
+
 .subnav a.nav-link.active:hover {
     color: black !important;
 }
@@ -1442,7 +1450,7 @@ text-align:right;
     font-size:17px;
 }
 .message-btn:hover {
-    background-color:#FECE1A;
+    background-color:#353c62;
 }
 .contact-info {
     text-align:center;
@@ -1462,7 +1470,7 @@ text-align:right;
 3.8 Footer
 ********************************************************************/
  .footer {
-    box-shadow: 0px -5px 10px 0px #ffd700;
+    box-shadow: 0px -5px 10px 0px #4e4674;
     background-color: black;
     line-height: 1;
     text-align: left;
@@ -1600,7 +1608,7 @@ text-align:right;
                 /* margin:30px; */
                 /* /* border:5px solid blue; */
                 /* height: 350px; */
-                /* overflow:scroll; */ */
+                /* overflow:scroll; */ 
             }
         } 
         @media(max-width:1368px){
@@ -1611,7 +1619,7 @@ text-align:right;
                 /* margin:30px; */
                 /* /* border:5px solid blue; */
                 /* height: 350px; */
-                /* overflow:scroll; */ */
+                /* overflow:scroll; */ 
             }
         }
        /* Faculty Members */
@@ -1721,7 +1729,7 @@ text-align:right;
                 margin: auto;
                 padding:0px;
                 float:none;
-       00     }
+           }
             .newsletter .da-img{
                 float:none;
                 /* border:3px solid red; */
@@ -1814,4 +1822,32 @@ body {font-family: Verdana, sans-serif; margin:0}
 
 img {vertical-align: middle;}
 
+.popup-box {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  pointer-events: none;
+}
 
+.popup-inner {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  min-width: 280px;
+  max-width: 320px;
+  font-size: 14px;
+  pointer-events: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}

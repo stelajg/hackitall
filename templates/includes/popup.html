@@ -1,0 +1,19 @@
+<!-- includes/popup.html -->
+<div id="welcomePopup" class="popup-box" style="display: none;">
+    <div class="popup-inner">
+        <span class="close-btn" id="closePopup">&times;</span>
+        <h5>👋 Welcome to NTB!</h5>
+        <p>We're happy you're here. If you need help or want to tell us who you are, you can do it below:</p>
+        
+        <form id="popupForm">
+        <div class="form-group">
+            <label for="username" style="font-weight: 600;">Your name:</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Enter your name" />
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary mt-2">Say Hello</button>
+        </form>
+
+        <div id="greeting" style="display: none; margin-top: 10px;"></div>
+    </div>
+</div>
+  

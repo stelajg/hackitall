@@ -20,11 +20,71 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const openPopup = document.getElementById("openPopup");
+          const closePopup = document.getElementById("closePopup");
+          const popup = document.getElementById("welcomePopup");
+          const form = document.getElementById("popupForm");
+          const input = document.getElementById("username");
+          const greeting = document.getElementById("greeting");
+      
+          // --- Load saved state on page load ---
+          const isOpen = localStorage.getItem("popupOpen") === "true";
+          const savedName = localStorage.getItem("popupName");
+          const greetingShown = localStorage.getItem("popupGreeted") === "true";
+      
+          if (isOpen) {
+            popup.style.display = "block";
+          }
+      
+          if (savedName) {
+            input.value = savedName;
+          }
+      
+          if (greetingShown && savedName) {
+            greeting.innerHTML = `<strong>Hi ${savedName}!</strong> 👋 We're glad you're here.`;
+            greeting.style.display = "block";
+          }
+      
+          // --- Toggle popup visibility ---
+          if (openPopup) {
+            openPopup.addEventListener("click", () => {
+              const currentlyOpen = popup.style.display === "block";
+              popup.style.display = currentlyOpen ? "none" : "block";
+              localStorage.setItem("popupOpen", !currentlyOpen);
+            });
+          }
+      
+          // --- Close popup ---
+          if (closePopup) {
+            closePopup.addEventListener("click", () => {
+              popup.style.display = "none";
+              localStorage.setItem("popupOpen", false);
+            });
+          }
+      
+          // --- Form submission ---
+          if (form) {
+            form.addEventListener("submit", function (e) {
+              e.preventDefault();
+              const name = input.value.trim();
+              if (name) {
+                greeting.innerHTML = `<strong>Hi ${name}!</strong> 👋 We're glad you're here.`;
+                greeting.style.display = "block";
+                localStorage.setItem("popupName", name);
+                localStorage.setItem("popupGreeted", true);
+              }
+            });
+          }
+        });
+      </script>       
 </head>
 <body>
 
 
     {% include "includes/header.html" %}
+    {% include 'includes/popup.html' %}
 
 <div class="container my-5">
     <!-- this code is used for showing any sucsees/worning/failur popup message -->
