@@ -132,3 +132,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+env37/lib64
+env37/bin/python
+env37/bin/python3
+env37/bin/python3.7
