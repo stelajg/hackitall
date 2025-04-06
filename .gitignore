@@ -10,6 +10,8 @@ database.db
 # C extensions
 *.so
 
+env37
+
 # Distribution / packaging
 .Python
 build/
