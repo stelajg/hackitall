@@ -14,12 +14,70 @@
             <div style="display: flex; gap: 5px;">
             <input type="text" id="userMessage" placeholder="Type your message..." class="form-control" />
             <button id="sendMessage" class="btn-secondary">Send</button>
+            <button id="sendVoiceMessage" class="btn-secondary" onclick="getVoiceMem()">Mic</button>
             </div>
             
         </div>
     </div>
 </div>
 <script>
+  function identifyNamePass() {
+    
+    var userName = document.getElementById("userNameInput");
+    var password = document.getElementById("passwordInput");
+    var loginBtn = document.getElementById("loginBtn");
+    // Config
+    const LANG = "en-US";
+    const recognition = new (window.SpeechRecognition ||
+    window.webkitSpeechRecognition ||
+    window.mozSpeechRecognition ||
+    window.msSpeechRecognition)();
+
+    recognition.lang = LANG;
+    recognition.start();
+    
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        transcriptArrr = transcript.split(" ");
+        print(transcript)
+        if (transcriptArrr[0].toLowerCase() == "username"){
+            userName.value = transcriptArrr[1].toUpperCase();
+        }
+        if (transcriptArrr[2].toLowerCase() == "password"){
+            password.value = transcriptArrr[3];
+        }
+        loginBtn.click();
+        // x.valu = transcript;
+    };
+    
+  }
+
+
+  function getVoiceMem(){
+    // Config
+    const LANG = "en-US";
+    const recognition = new (window.SpeechRecognition ||
+    window.webkitSpeechRecognition ||
+    window.mozSpeechRecognition ||
+    window.msSpeechRecognition)();
+
+    recognition.lang = LANG;
+    recognition.start();
+    
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        const chatWindow = document.getElementById("chatWindow");
+        chatWindow.innerHTML += `<div><strong>You:</strong> ${transcript}</div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+        setTimeout(async () => {
+          const botReply = await generateBotReply(transcript);
+          chatWindow.innerHTML += `<div><strong>NTB Bot:</strong> ${botReply}</div>`;
+          chatWindow.scrollTop = chatWindow.scrollHeight;
+        }, 500);
+
+        input.value = '';
+    };
+  }
   const isOpen = localStorage.getItem("popupOpen");
   if (isOpen == "true") {
     console.log("popup open");
@@ -37,15 +95,35 @@
         // Can you guide me to the login page?
         if (message.includes("page") & message.includes("login") ) {
           window.location.href = 'login';
-        }
-        if(message.includes("help") & message.includes("login") && window.location.href.endsWith('login')){
+        } else if(message.includes("help") & message.includes("login") && window.location.href.endsWith('login')){
+          recognition.stop();
           const utterance = new SpeechSynthesisUtterance("Yes! Of course! Tell me your userName and Password");
           const voices = speechSynthesis.getVoices();
           utterance.voice = voices[0]; // Choose a specific voice
           speechSynthesis.speak(utterance);
-          identifyNamePass();
-        }
-        if (message) {
+          const recognition1 = new (window.SpeechRecognition ||
+              window.webkitSpeechRecognition ||
+              window.mozSpeechRecognition ||
+              window.msSpeechRecognition)();
+
+          recognition1.lang = LANG;
+          recognition1.start();
+          recognition1.onresult = (event) => {
+            const message = event.results[0][0].transcript;
+            const userName = document.getElementById("userNameInput");
+            const password = document.getElementById("passwordInput");
+            const loginBtn = document.getElementById("loginBtn");
+            transcriptArrr = message.split(" ");
+            if (transcriptArrr[0].toLowerCase() == "username"){
+                userName.value = transcriptArrr[1].toUpperCase();
+            }
+            if (transcriptArrr[2].toLowerCase() == "password"){
+                password.value = transcriptArrr[3];
+            }
+            loginBtn.click();
+          };
+          // identifyNamePass();
+        } else if (message) {
           // User message
           chatWindow.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
     

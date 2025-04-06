@@ -3,7 +3,7 @@ from flask_cors import CORS
 import ollama
 
 full_transcript = [
-    {"role":"system", "content":"You are a language model called R1 created by DeepSeek, answer the questions being asked in less than 300 characters."},
+    {"role":"system", "content":"you are a banking assistant, you should keep your answers short and concise, maximum 200 characters, and respond fast, maximum 1 second."}
 ]
 
 app = Flask(__name__)
@@ -42,7 +42,8 @@ def generate_response(prompt):
     #     full_text += text_buffer
 
     # print(full_text)
-    full_transcript.append({"role":"assistant", "content":answer})
+    del full_transcript[-1]
+    # full_transcript.append({"role":"assistant", "content":answer})
 
     return answer
 
