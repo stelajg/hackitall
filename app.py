@@ -597,7 +597,8 @@ def login():
     if request.method == "POST":
         usern = request.form.get("username").upper()
         passw = request.form.get("password").encode('utf-8')
-        sql_query = text('SELECT * FROM users WHERE id = :u')
+        # sql_query = text('SELECT * FROM users WHERE id = :u')
+        print(usern, passw)
         #result = db.execute(sql_query, {"u": usern}).fetchone()
         result = db.query(Users).filter_by(id=usern).first()
         if result is not None:
