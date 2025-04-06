@@ -42,5 +42,15 @@ def accounts():
     db.commit()
     print("accounts Completed ............................................ ")
 
+    usern = 'PRETTY'
+    name = 'PRETTY'
+    usert = 'executive'
+    passw = 'flower'
+    passw_hash = bcrypt.generate_password_hash(passw).decode('utf-8')
+    text1 = f'INSERT OR IGNORE INTO users (id,name,user_type,password) VALUES (\'{usern}\',\'{name}\',\'{usert}\',\'{passw_hash}\')'
+    db.execute(text(text1))
+    db.commit()
+    print("accounts Completed ............................................ ")
+
 if __name__ == "__main__":
     accounts()

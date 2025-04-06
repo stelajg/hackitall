@@ -1,9 +1,6 @@
-import speech_recognition as sr
-import sys
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import ollama
-import subprocess
 
 full_transcript = [
     {"role":"system", "content":"You are a language model called R1 created by DeepSeek, answer the questions being asked in less than 300 characters."},

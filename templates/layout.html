@@ -30,9 +30,9 @@
           const greeting = document.getElementById("greeting");
       
           // --- Load saved state on page load ---
-          const isOpen = localStorage.getItem("popupOpen") === "true";
+          const isOpen = localStorage.getItem("popupOpen") == "true";
           const savedName = localStorage.getItem("popupName");
-          const greetingShown = localStorage.getItem("popupGreeted") === "true";
+          const greetingShown = localStorage.getItem("popupGreeted") == "true";
       
           if (isOpen) {
             popup.style.display = "block";
@@ -53,6 +53,7 @@
               const currentlyOpen = popup.style.display === "block";
               popup.style.display = currentlyOpen ? "none" : "block";
               localStorage.setItem("popupOpen", !currentlyOpen);
+              window.location.reload()
             });
           }
       
@@ -60,7 +61,7 @@
           if (closePopup) {
             closePopup.addEventListener("click", () => {
               popup.style.display = "none";
-              localStorage.setItem("popupOpen", false);
+              localStorage.setItem("popupOpen", "false");
             });
           }
       
@@ -78,7 +79,7 @@
             });
           }
         });
-      </script>      
+      </script>   
 </head>
 <body>
 

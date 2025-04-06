@@ -15,57 +15,101 @@
             <input type="text" id="userMessage" placeholder="Type your message..." class="form-control" />
             <button id="sendMessage" class="btn-secondary">Send</button>
             </div>
-            <script>
-              document.getElementById("sendMessage").addEventListener("click", async () => {
-                const chatWindow = document.getElementById("chatWindow");
-                const input = document.getElementById("userMessage");
-                const message = input.value.trim();
-            
-                if (message) {
-                  // User message
-                  chatWindow.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
-            
-                  // Basic fake bot response with async function
-                  setTimeout(async () => {
-                    const botReply = await generateBotReply(message);
-                    chatWindow.innerHTML += `<div><strong>NTB Bot:</strong> ${botReply}</div>`;
-                    chatWindow.scrollTop = chatWindow.scrollHeight;
-                  }, 500);
-            
-                  input.value = '';
-                }
-              });
-            
-              async function generateBotReply(msg) {
-                const url = 'http://127.0.0.1:5005/chat';
-            
-                // Construct the data to be sent in the request
-                const data = {
-                  message: msg // The message from the user
-                };
-            
-                try {
-                  // Use fetch to make the POST request and wait for the response
-                  const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json' // Set the Content-Type header to JSON
-                    },
-                    body: JSON.stringify(data) // Convert the data to a JSON string
-                  });
-                  // Parse the response as JSON
-                  const responseData = await response.json();
-            
-                  console.log('Bot reply:', responseData.response); // Handle the bot's reply
-                  return responseData.response; // Return the bot's reply
-                } catch (error) {
-                  console.error('Error:', error); // Handle any errors
-                  return "Sorry, I couldn't process your request."; // Fallback reply in case of error
-                }
-              }
-            </script>
             
         </div>
     </div>
 </div>
-  
+<script>
+  const isOpen = localStorage.getItem("popupOpen");
+  if (isOpen == "true") {
+    console.log("popup open");
+    const LANG = "en-US";
+    const recognition = new (window.SpeechRecognition ||
+    window.webkitSpeechRecognition ||
+    window.mozSpeechRecognition ||
+    window.msSpeechRecognition)();
+
+    recognition.lang = LANG;
+    recognition.start();
+    
+    recognition.onresult = (event) => {
+        const message = event.results[0][0].transcript;
+        // Can you guide me to the login page?
+        if (message.includes("page") & message.includes("login") ) {
+          window.location.href = 'login';
+        }
+        if(message.includes("help") & message.includes("login") && window.location.href.endsWith('login')){
+          const utterance = new SpeechSynthesisUtterance("Yes! Of course! Tell me your userName and Password");
+          const voices = speechSynthesis.getVoices();
+          utterance.voice = voices[0]; // Choose a specific voice
+          speechSynthesis.speak(utterance);
+          identifyNamePass();
+        }
+        if (message) {
+          // User message
+          chatWindow.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+    
+          // Basic fake bot response with async function
+          setTimeout(async () => {
+            const botReply = await generateBotReply(message);
+            chatWindow.innerHTML += `<div><strong>NTB Bot:</strong> ${botReply}</div>`;
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+          }, 500);
+    
+          // input.value = '';
+        }
+    };
+  };
+
+  document.getElementById("sendMessage").addEventListener("click", async () => {
+    const chatWindow = document.getElementById("chatWindow");
+    const input = document.getElementById("userMessage");
+    const message = input.value.trim();
+
+    if (message) {
+      // User message
+      chatWindow.innerHTML += `<div><strong>You:</strong> ${message}</div>`;
+
+      // Basic fake bot response with async function
+      setTimeout(async () => {
+        const botReply = await generateBotReply(message);
+        chatWindow.innerHTML += `<div><strong>NTB Bot:</strong> ${botReply}</div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }, 500);
+
+      input.value = '';
+    }
+  });
+
+  async function generateBotReply(msg) {
+    const url = 'http://127.0.0.1:5005/chat';
+
+    // Construct the data to be sent in the request
+    const data = {
+      message: msg // The message from the user
+    };
+
+    try {
+      // Use fetch to make the POST request and wait for the response
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json' // Set the Content-Type header to JSON
+        },
+        body: JSON.stringify(data) // Convert the data to a JSON string
+      });
+      // Parse the response as JSON
+      const responseData = await response.json();
+      // Voice the reply 
+      const utterance = new SpeechSynthesisUtterance(responseData.response);
+      const voices = speechSynthesis.getVoices();
+      utterance.voice = voices[0]; // Choose a specific voice
+      speechSynthesis.speak(utterance);
+      console.log('Bot reply:', responseData.response); // Handle the bot's reply
+      return responseData.response; // Return the bot's reply
+    } catch (error) {
+      console.error('Error:', error); // Handle any errors
+      return "Sorry, I couldn't process your request."; // Fallback reply in case of error
+    }
+  }
+</script>

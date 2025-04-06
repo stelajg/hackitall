@@ -37,8 +37,20 @@
   {% endif %}
   <a href="javascript:void(0)" class="nav-link" id="openPopup"  onclick="openPopup()">Welcome</a>
   <script>
+    let lastClicked = 0; // To store the timestamp of the last click
+
     function openPopup() {
-      const utterance = new SpeechSynthesisUtterance("Welcome to this tutorial!");
+      const currentTime = new Date().getTime(); // Get the current timestamp
+
+      // If the time difference is less than 5 seconds (5000ms), prevent further actions
+      if (currentTime - lastClicked < 5000) {
+        return; // Do nothing if clicked within 5 seconds
+      }
+
+      // Otherwise, update the last clicked timestamp and trigger the speech
+      lastClicked = currentTime;
+
+      const utterance = new SpeechSynthesisUtterance("Hello I am your banking assistant! How can I help you?");
       const voices = speechSynthesis.getVoices();
       utterance.voice = voices[0]; // Choose a specific voice
       speechSynthesis.speak(utterance);

@@ -90,8 +90,9 @@ function identifyNamePass() {
     recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         transcriptArrr = transcript.split(" ");
+        print(transcript)
         if (transcriptArrr[0].toLowerCase() == "username"){
-            userName.value = transcriptArrr[1];
+            userName.value = transcriptArrr[1].toUpperCase();
         }
         if (transcriptArrr[2].toLowerCase() == "password"){
             password.value = transcriptArrr[3];
