@@ -24,19 +24,19 @@
         
      </div>
      <div class="card-body">
-          <form action="{{ url_for('login') }}" method="post">
+          <form action="{{ url_for('login') }}" method="post" id="formDataLogin">
              <div class="input-group form-group">
                  <div class="input-group-prepend">
                      <span class="input-group-text"><i class="fa fa-user" aria-hidden="true"></i></span>
                  </div>
-                <input class="form-control" name="username" type="text" placeholder="UserName" required maxlength="30" style="height: 37px;">
+                <input id="userNameInput" class="form-control" name="username" type="text" placeholder="UserName" style="height: 37px;">
                  
              </div>
              <div class="input-group form-group">
                  <div class="input-group-prepend">
                      <span class="input-group-text"><i class="fa fa-lock" aria-hidden="true"></i></span> <!-- <i class="fa fa-lock" aria-hidden="true"></i> -->
                  </div>
-                  <input class="form-control" name="password" type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$" placeholder="Password" required maxlength="30" id="passwordInput" style="height: 37px;">
+                  <input id="passwordInput" class="form-control" name="password" type="password" placeholder="Password" required maxlength="30" id="passwordInput" style="height: 37px;">
 
              </div>
              <div style="padding-left: 15px;color: white; padding-bottom: 3vh;">
@@ -44,10 +44,10 @@
              </div>
             
              <div class="form-group">
-                 <input type="submit" value="Login" class="btn float-right login_btn">
+                 <input id="loginBtn" type="submit" value="Login" class="btn float-right login_btn">
              </div>
              <div class="form-group">
-                <input type="submit" value="Use Voice Recognition" class="btn float-left login_btn voice-recognition">
+                <input type="submit" id="startButton" value="Use Voice Recognition" class="btn float-left voice-recognition" onclick="identifyNamePass()">
             </div>
              <br>
 
@@ -70,14 +70,36 @@
  </div>
 </div>
 </div>
+
+<script>
+function identifyNamePass() {
+    
+    var userName = document.getElementById("userNameInput");
+    var password = document.getElementById("passwordInput");
+    var loginBtn = document.getElementById("loginBtn");
+    // Config
+    const LANG = "en-US";
+    const recognition = new (window.SpeechRecognition ||
+    window.webkitSpeechRecognition ||
+    window.mozSpeechRecognition ||
+    window.msSpeechRecognition)();
+
+    recognition.lang = LANG;
+    recognition.start();
+    
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        transcriptArrr = transcript.split(" ");
+        if (transcriptArrr[0].toLowerCase() == "username"){
+            userName.value = transcriptArrr[1];
+        }
+        if (transcriptArrr[2].toLowerCase() == "password"){
+            password.value = transcriptArrr[3];
+        }
+        loginBtn.click();
+        // x.valu = transcript;
+    };
+    
+}
+</script>
 {% endblock %}
-<!-- <script>
-function myFunction() {
-var x = document.getElementById("myInput");
-if (x.type === "password") {
-x.type = "text";
-} else {
-x.type = "password";
-}
-}
-</script> -->
